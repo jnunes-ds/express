@@ -1,21 +1,29 @@
-const express = require('express');
-const path = require('path');
+var express = require('express');
+var path = require('path');
+var bodyParser = require('body-parser');
+
 
 const app = express();
 
 app.use("/meusite", express.static(path.join(__dirname, 'client')));
 
-app.get("/", (req, res) => {
-    res.type("html");
-    res.send("<h1>Hello, world! from GET!</h1>");
-});
+let consoleMethod = (req, res, next) => {
+    console.log(req.body);
+    next();
+};
 
-app.post("/", (req, res) => {
-    res.send("<h1>Hello, world! from POST!</h1>");
-});
+let hello = (req, res) => {
+    res.send("Hello World!")
+};
+
+app.use("/", bodyParser.json());
+app.use("/", consoleMethod);
+app.get("/", hello);
+
+app.post("/", hello);
 
 app.put("/", (req, res) => {
-    res.send("<h1>Hello, world! from PUT!</h1>");
+    res.send("<Hello,>Hello, world! from PUT!</Hello,>");
 });
 
 app.delete("/", (req, res) => {
