@@ -8,6 +8,27 @@
 </head>
 <body>
     <h1>Hello World!</h1>
-    <script src="../index.js"></script>
+    <script>
+        fetch(' http://localhost:5000/', { method: 'post'})
+            .then(res => {
+                return res.text();
+            }).then(html => {
+                console.log(html);
+            });
+        
+        fetch(' http://localhost:5000/', { method: 'put'})
+            .then(res => {
+                return res.text();
+            }).then(html => {
+                console.log(html);
+            });
+
+        fetch(' http://localhost:5000/', { method: 'delete'})
+            .then(res => {
+                return res.text();
+            }).then(html => {
+                console.log(html);
+            });
+    </script>
 </body>
 </html>
